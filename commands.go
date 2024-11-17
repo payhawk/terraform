@@ -372,6 +372,12 @@ func initCommands(
 			}, nil
 		},
 
+		"state lock": func() (cli.Command, error) {
+			return &command.StateLockCommand{
+				Meta: meta,
+			}, nil
+		},
+
 		"state rm": func() (cli.Command, error) {
 			return &command.StateRmCommand{
 				StateMeta: command.StateMeta{

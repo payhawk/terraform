@@ -65,6 +65,8 @@ type Locker interface {
 
 	// Timeout returns the configured timeout duration
 	Timeout() time.Duration
+
+	LockID() string
 }
 
 type locker struct {
@@ -167,6 +169,10 @@ func (l *locker) Timeout() time.Duration {
 	return l.timeout
 }
 
+func (l *locker) LockID() string {
+	return l.lockID
+}
+
 type noopLocker struct{}
 
 // NewNoopLocker returns a valid Locker that does nothing.
@@ -190,4 +196,8 @@ func (l noopLocker) Unlock() tfdiags.Diagnostics {
 
 func (l noopLocker) Timeout() time.Duration {
 	return 0
+}
+
+func (l noopLocker) LockID() string {
+	return ""
 }
